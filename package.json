@@ -1,0 +1,11 @@
+{
+  "name": "bypasser-web",
+  "version": "1.0.0",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "vercel dev"
+  },
+  "engines": { "node": "20.x" },
+  "dependencies": { "express": "^4.19.2" }
+}
