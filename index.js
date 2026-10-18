@@ -6,9 +6,9 @@ const zlib = require("zlib");
 const crypto = require("crypto");
 
 // ==========================================
-// 1. LOGIKA BYPASS (RESOLVER) 
+// 1. LOGIKA BYPASS (RESOLVER)
 // ==========================================
-const UA = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36";
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 function createJar() {
   const jar = new Map();
@@ -41,10 +41,22 @@ function request(url, options = {}, jar) {
   return new Promise((resolve, reject) => {
     const parsed = new URL(url);
     const transport = parsed.protocol === "https:" ? https : http;
+    
+    // 🔥 HEADER ANTI BLOKIR CLOUDFLARE
     const headers = {
-      "User-Agent": UA, "Accept": "*/*", "Accept-Encoding": "gzip, deflate, br",
-      "Connection": "keep-alive", ...(options.headers || {})
+      "User-Agent": UA,
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9,id;q=0.8",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Connection": "keep-alive",
+      "Upgrade-Insecure-Requests": "1",
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "none",
+      "Sec-Fetch-User": "?1",
+      ...(options.headers || {})
     };
+
     const cookies = jar ? jar.header() : "";
     if (cookies) headers.Cookie = cookies;
     const req = transport.request({
@@ -198,7 +210,7 @@ async function resolveReadyGo(url, jar) {
 async function bypass(input) {
   const jar = createJar();
   const short = await get(input, {}, jar);
-  if (short.status !== 200) throw new Error("Shortlink gagal diakses");
+  if (short.status !== 200) throw new Error(`Shortlink gagal diakses (Status: ${short.status})`);
   const redirect = extractRedirect(short.text);
   if (!redirect) throw new Error("redirect.php tidak ditemukan di halaman shortlink");
   const red = await get(redirect, {}, jar);
@@ -231,14 +243,13 @@ async function bypass(input) {
 }
 
 // ==========================================
-// 2. SETUP EXPRESS & ROUTING 
+// 2. SETUP EXPRESS & ROUTING
 // ==========================================
 const app = express();
 app.use(express.json());
 
-// 🔥 FIX PATH: Karena file lo sejajar (gak ada folder public)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html")); 
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/style.css", (req, res) => res.sendFile(path.join(__dirname, "style.css")));
