@@ -6,7 +6,7 @@ const zlib = require("zlib");
 const crypto = require("crypto");
 
 // ==========================================
-// 1. LOGIKA BYPASS (RESOLVER)
+// 1. LOGIKA BYPASS (RESOLVER) 
 // ==========================================
 const UA = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36";
 
@@ -231,13 +231,18 @@ async function bypass(input) {
 }
 
 // ==========================================
-// 2. SETUP EXPRESS & ROUTING
+// 2. SETUP EXPRESS & ROUTING 
 // ==========================================
 const app = express();
-
-// 🔥 FIX: Pake __dirname biar Vercel dijamin nemu folder public
-app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
+
+// 🔥 FIX PATH: Karena file lo sejajar (gak ada folder public)
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html")); 
+});
+
+app.get("/style.css", (req, res) => res.sendFile(path.join(__dirname, "style.css")));
+app.get("/script.js", (req, res) => res.sendFile(path.join(__dirname, "script.js")));
 
 app.post("/api/bypass", async (req, res) => {
   const { url } = req.body;
@@ -252,5 +257,4 @@ app.post("/api/bypass", async (req, res) => {
   }
 });
 
-// Vercel wajib pake module.exports, jangan app.listen()
 module.exports = app;
