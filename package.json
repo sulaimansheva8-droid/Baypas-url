@@ -6,6 +6,6 @@
     "start": "node api/index.js",
     "dev": "vercel dev"
   },
-  "engines": { "node": "20.x" },
+  "engines": { "node": "24.x" },
   "dependencies": { "express": "^4.19.2" }
 }
