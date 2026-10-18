@@ -1,3 +1,15 @@
+const path = require("path"); // <-- Tambahin ini di paling atas
+
+const app = express();
+
+// TAMBAHIN 1 BARIS INI BIAR EXPRESS BISA BACA FOLDER PUBLIC
+app.use(express.static(path.join(process.cwd(), "public")));
+
+app.use(express.json());
+
+// ... (kode POST /api/bypass lo yang lama biarin aja) ...
+
+module.exports = app;
 const express = require("express");
 const https = require("https");
 const http = require("http");
