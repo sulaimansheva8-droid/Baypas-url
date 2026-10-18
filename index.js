@@ -1,23 +1,12 @@
-const path = require("path"); // <-- Tambahin ini di paling atas
-
-const app = express();
-
-// TAMBAHIN 1 BARIS INI BIAR EXPRESS BISA BACA FOLDER PUBLIC
-app.use(express.static(path.join(process.cwd(), "public")));
-
-app.use(express.json());
-
-// ... (kode POST /api/bypass lo yang lama biarin aja) ...
-
-module.exports = app;
 const express = require("express");
+const path = require("path");
 const https = require("https");
 const http = require("http");
 const zlib = require("zlib");
 const crypto = require("crypto");
 
 // ==========================================
-// 1. KODE DARI RESOLVER.JS (DIGABUNG KE SINI)
+// 1. LOGIKA BYPASS (RESOLVER)
 // ==========================================
 const UA = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36";
 
@@ -241,11 +230,13 @@ async function bypass(input) {
   return mediafire;
 }
 
-
 // ==========================================
-// 2. KODE EXPRESS & API ROUTE
+// 2. SETUP EXPRESS & ROUTING
 // ==========================================
 const app = express();
+
+// 🔥 FIX: Pake __dirname biar Vercel dijamin nemu folder public
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
 app.post("/api/bypass", async (req, res) => {
@@ -261,5 +252,5 @@ app.post("/api/bypass", async (req, res) => {
   }
 });
 
-// WAJIB: Vercel butuh module.exports, bukan app.listen
+// Vercel wajib pake module.exports, jangan app.listen()
 module.exports = app;
