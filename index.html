@@ -1,34 +1,291 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediaFire Bypasser 🔥</title>
-  <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bypass SFL</title>
+    
+    <!-- Import Font & CSS digabung di sini -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0f0a1a;
+            color: #e2d9f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        .card {
+            background-color: rgba(30, 20, 50, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #a78bfa;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            background-color: #8b5cf6;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        input {
+            flex: 1;
+            background-color: #0f0a1a;
+            border: 1px solid #4c1d95;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #8b5cf6;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4c1d95;
+            color: #e2d9f3;
+            padding: 0 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #a78bfa;
+            color: #0f0a1a;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #c4b5fd;
+        }
+
+        .btn-primary:disabled {
+            background-color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .log-card {
+            background-color: #150d26;
+        }
+
+        .log-content {
+            font-family: monospace;
+            font-size: 13px;
+            color: #9ca3af;
+            min-height: 60px;
+            word-break: break-all;
+        }
+
+        .log-idle { color: #6b7280; }
+        .log-success { color: #10b981; }
+        .log-error { color: #ef4444; }
+
+        .error-card {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: none;
+        }
+
+        .error-card.visible {
+            display: block;
+        }
+
+        .error-card p {
+            font-size: 12px;
+            color: #fca5a5;
+            margin-bottom: 6px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: #ef4444 !important;
+            font-size: 13px !important;
+            font-weight: 600;
+        }
+
+        .error-hint {
+            color: #9ca3af !important;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>⚡ MediaFire Bypasser</h1>
-      <p class="subtitle">Tempel shortlink, dapetin link MediaFire langsung. No iklan, no drama 😎</p>
-    </header>
-    <main>
-      <div class="input-group">
-        <input id="urlInput" type="text" placeholder="https://sfl.gl/xxxxx atau shortlink lainnya..." />
-        <button id="goBtn">Gaskeun 🚀</button>
-      </div>
-      <div id="status" class="status hidden"></div>
-      <div id="result" class="result hidden">
-        <label>Link MediaFire:</label>
-        <div class="result-row">
-          <input id="resultInput" type="text" readonly />
-          <button id="copyBtn" title="Copy">📋</button>
+    <div class="container">
+        <div class="header">
+            <h1>Bypass SFL</h1>
+            <p>Tempel link SFL, tekan bypass, link aslinya langsung muncul. Nggak perlu nunggu iklan.</p>
         </div>
-        <a id="openBtn" target="_blank" rel="noopener">Buka di tab baru ↗</a>
-      </div>
-    </main>
-    <footer><p>GeminiXD © 2108 — built with 💀 &amp; Node.js</p></footer>
-  </div>
-  <script src="/script.js"></script>
+
+        <div class="card">
+            <label><span class="badge">1</span> LINK SFL</label>
+            <div class="input-group">
+                <input type="text" id="sflUrl" placeholder="https://sfl.gl/xxxxx" autocomplete="off">
+                <button id="pasteBtn" class="btn-outline">Tempel</button>
+            </div>
+        </div>
+
+        <button id="bypassBtn" class="btn-primary">Bypass sekarang</button>
+
+        <div class="card log-card">
+            <label><span class="badge">2</span> LOG</label>
+            <div id="logContent" class="log-content">
+                <p class="log-idle">> Menunggu perintah...</p>
+            </div>
+        </div>
+
+        <div id="errorCard" class="card error-card hidden">
+            <p>Gagal bypass</p>
+            <p id="errorMsg" class="error-text">HTTP Error: 500</p>
+            <p class="error-hint">Kemungkinan server diblokir Cloudflare atau link tidak valid.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript digabung di sini -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlInput = document.getElementById('sflUrl');
+            const bypassBtn = document.getElementById('bypassBtn');
+            const pasteBtn = document.getElementById('pasteBtn');
+            const logContent = document.getElementById('logContent');
+            const errorCard = document.getElementById('errorCard');
+            const errorMsg = document.getElementById('errorMsg');
+
+            // Fungsi Tombol Tempel
+            pasteBtn.addEventListener('click', async () => {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    urlInput.value = text;
+                } catch (err) {
+                    alert('Gagal menempel. Izinkan akses clipboard di browser kamu.');
+                }
+            });
+
+            // Fungsi Bypass
+            bypassBtn.addEventListener('click', async () => {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    alert('Masukkan link SFL terlebih dahulu!');
+                    return;
+                }
+
+                // Reset UI
+                errorCard.classList.remove('visible');
+                bypassBtn.disabled = true;
+                bypassBtn.textContent = 'Memproses...';
+                logContent.innerHTML = '<p>> Mengirim link ke API...</p>';
+
+                try {
+                    const response = await fetch('/api/bypass', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ url })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.ok) {
+                        // Sukses
+                        logContent.innerHTML = `
+                            <p class="log-success">> Berhasil!</p>
+                            <p style="margin-top: 8px; color: #10b981;">Link MediaFire:</p>
+                            <a href="${data.result}" target="_blank" style="color: #a78bfa; word-break: break-all;">${data.result}</a>
+                        `;
+                    } else {
+                        // Gagal dari API
+                        throw new Error(data.error || 'Terjadi kesalahan tidak diketahui');
+                    }
+                } catch (error) {
+                    // Gagal fetch / error server
+                    logContent.innerHTML = `<p class="log-error">x Gagal</p>`;
+                    errorCard.classList.add('visible');
+                    errorMsg.textContent = `Error: ${error.message}`;
+                } finally {
+                    bypassBtn.disabled = false;
+                    bypassBtn.textContent = 'Bypass sekarang';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
